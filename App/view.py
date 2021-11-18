@@ -28,6 +28,7 @@
 import sys
 import config
 import threading
+import time
 from App import controller
 from DISClib.ADT import stack
 assert config
@@ -44,7 +45,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-servicefile = 'bus_routes_14000.csv'
+servicefile = 'bus_routes_150.csv'
 initialStation = None
 
 # ___________________________________________________
@@ -134,8 +135,20 @@ def thread_cycle():
 
         elif int(inputs[0]) == 4:
             msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
+            start_time = time.process_time()
+
             initialStation = input(msg)
+
             optionFour(cont, initialStation)
+    
+            stop_time = time.process_time()
+
+            elapsed_time_mseg = round((stop_time - start_time)*1000,2)
+
+            print('El tiempo de procesamiento del requerimiento elegido es: ' + str(elapsed_time_mseg) + ' ms' + '\n')
+
+
+            
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")
